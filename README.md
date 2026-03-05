@@ -135,13 +135,6 @@ Each feature follows the same structure:
 
 This project is created for portfolio purposes.
 
-## 👤 Author
-
-**Your Name**
-- LinkedIn: [Your LinkedIn Profile](https://linkedin.com/in/yourprofile)
-- GitHub: [@yourusername](https://github.com/yourusername)
-- Portfolio: [yourportfolio.com](https://yourportfolio.com)
-
 ## 🙏 Acknowledgments
 
 - Design inspiration from modern grocery apps
