@@ -39,7 +39,8 @@ class MockHomeRepository {
         price: 6.99,
         category: 'Fresh',
         backgroundColor: Color(0xFFC8E6C9),
-        imageUrl: 'https://pngimg.com/d/pepper_PNG3248.png',
+        imageUrl:
+            'https://www.jiomart.com/images/product/original/590000143/green-capsicum-500-g-product-images-o590000143-p590000143-0-202410011659.jpg?im=Resize=(1000,1000)',
         discount: 20,
         badge: '20% OFF',
         rating: 4.6,
@@ -48,11 +49,9 @@ class MockHomeRepository {
         quantity: 75,
         vendor: 'Fresh Farms',
         variants: [
-          'https://pngimg.com/d/pepper_PNG3248.png',
-          'https://pngimg.com/d/pepper_PNG99.png',
-          'https://pngimg.com/d/carrot_PNG4985.png',
-          'https://pngimg.com/d/garlic_PNG17225.png',
-          'https://pngimg.com/d/onion_PNG99213.png',
+          'https://www.jiomart.com/images/product/original/590003662/green-capsicum-500-g-product-images-o590003662-p590003662-0-202408132028.jpg?im=Resize=(1000,1000)',
+          'https://cdn.shopaccino.com/rootz/products/capsicum-green-1903938412968569_m.jpg?v=569',
+          'https://freshindiaorganics.com/cdn/shop/products/Green-Capsicum-Edited.jpg?v=1569230008',
         ],
       ),
       const Product(
@@ -62,7 +61,8 @@ class MockHomeRepository {
         price: 3.99,
         backgroundColor: Color(0xFFFFCDD2),
         category: 'Fresh',
-        imageUrl: 'https://pngimg.com/d/tomato_PNG12592.png',
+        imageUrl:
+            'https://tiimg.tistatic.com/fp/1/007/567/pure-fresh-red-tomato-with-3-days-shelf-life-rich-in-vitamins-a-c-k-423.jpg',
         discount: 15,
         badge: '15% OFF',
         rating: 4.7,
@@ -71,11 +71,7 @@ class MockHomeRepository {
         quantity: 100,
         vendor: 'Organic Store',
         variants: [
-          'https://pngimg.com/d/tomato_PNG12592.png',
-          'https://pngimg.com/d/carrot_PNG4985.png',
-          'https://pngimg.com/d/onion_PNG99213.png',
-          'https://pngimg.com/d/pepper_PNG3248.png',
-          'https://pngimg.com/d/cucumber_PNG84.png',
+          'https://daganghalal.blob.core.windows.net/22707/Product/13081_tomato%20260.jpg',
         ],
       ),
       const Product(
@@ -85,7 +81,8 @@ class MockHomeRepository {
         price: 2.99,
         backgroundColor: Color(0xFFFFE0B2),
         category: 'Fresh',
-        imageUrl: 'https://pngimg.com/d/carrot_PNG4985.png',
+        imageUrl:
+            'https://nurserylive.com/cdn/shop/products/nurserylive-seeds-carrot-early-nantus-desi-vegetable-seeds-16968687419532.jpg?v=1634203403',
         discount: 10,
         badge: '10% OFF',
         rating: 4.5,
@@ -94,11 +91,8 @@ class MockHomeRepository {
         quantity: 80,
         vendor: 'Green Valley',
         variants: [
-          'https://pngimg.com/d/carrot_PNG4985.png',
-          'https://pngimg.com/d/potato_PNG93817.png',
-          'https://pngimg.com/d/onion_PNG99213.png',
-          'https://pngimg.com/d/garlic_PNG17225.png',
-          'https://pngimg.com/d/ginger_PNG110.png',
+          'https://5.imimg.com/data5/SELLER/Default/2022/10/JY/SK/TN/161422039/fresh-carrots-fresh-red-carrot-for-sale-1513637912-3529401.jpeg',
+          'https://m.media-amazon.com/images/I/61e7AiNbINL._AC_UF894,1000_QL80_.jpg',
         ],
       ),
       const Product(
