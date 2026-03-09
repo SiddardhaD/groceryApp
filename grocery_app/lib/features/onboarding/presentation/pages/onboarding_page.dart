@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/constants/app_constants.dart';
+import '../../../../core/utils/responsive_utils.dart';
 import '../../../home/presentation/pages/main_navigation_page.dart';
 
 class OnboardingPage extends StatefulWidget {
@@ -106,72 +107,77 @@ class _OnboardingPageState extends State<OnboardingPage>
               decoration: BoxDecoration(
                 gradient: RadialGradient(
                   center: Alignment.center,
-                  radius: 1.0,
+                  radius: 1.2,
                   colors: [
-                    Colors.white.withOpacity(0.7),
-                    Colors.white.withOpacity(0.5),
-                    AppColors.lightGreen.withOpacity(0.4),
-                    AppColors.primaryGreen.withOpacity(0.5),
-                    AppColors.primaryGreen.withOpacity(0.9),
+                    Colors.white.withValues(alpha: 0.85),
+                    const Color(0xFFF5FFB3).withValues(alpha: 0.8),
+                    const Color(0xFFCDFF00).withValues(alpha: 0.7),
+                    const Color(0xFFB8E600).withValues(alpha: 0.85),
+                    const Color(0xFF89A600).withValues(alpha: 0.95),
                   ],
-                  stops: const [0.0, 0.1, 0.5, 0.75, 1.0],
+                  stops: const [0.0, 0.2, 0.5, 0.75, 1.0],
                 ),
               ),
               child: SafeArea(
                 child: Stack(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(AppConstants.largePadding),
+                      padding: EdgeInsets.all(ResponsiveUtils.p(context, 24)),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Spacer(flex: 1),
                           Center(
                             child: SizedBox(
-                              height: 350,
-                              width: 280,
+                              height: ResponsiveUtils.h(context, 350),
+                              width: ResponsiveUtils.w(context, 280),
                               child: Stack(
                                 alignment: Alignment.center,
                                 children: [
                                   ..._buildAnimatedVegetables(),
                                   Positioned(
-                                    top: 120,
+                                    top: ResponsiveUtils.h(context, 120),
                                     child: SlideTransition(
                                       position: _cartSlideAnimation,
-                                      child: const Center(
+                                      child: Center(
                                         child: Text(
                                           '🛒',
-                                          style: TextStyle(fontSize: 120),
+                                          style: TextStyle(
+                                            fontSize: ResponsiveUtils.f(
+                                              context,
+                                              120,
+                                            ),
+                                          ),
                                         ),
                                       ),
                                     ),
                                   ),
                                   Positioned(
-                                    top: 50,
-                                    right: 10,
+                                    top: ResponsiveUtils.h(context, 50),
+                                    right: ResponsiveUtils.w(context, 10),
                                     child: ScaleTransition(
                                       scale: _badge1ScaleAnimation,
                                       child: _buildFloatingBadge(
                                         'Naturally fresh, chemical-\nfree and nutritious',
-                                        const Icon(
+                                        Icon(
                                           Icons.eco,
                                           color: AppColors.darkGreen,
-                                          size: 20,
+                                          size: ResponsiveUtils.f(context, 20),
                                         ),
                                       ),
                                     ),
                                   ),
                                   Positioned(
-                                    bottom: 10,
+                                    bottom: ResponsiveUtils.h(context, 10),
                                     left: 0,
                                     child: ScaleTransition(
                                       scale: _badge2ScaleAnimation,
                                       child: _buildFloatingBadge(
                                         'Premium sweetness that\nadds color & flavor',
-                                        const Icon(
+                                        Icon(
                                           Icons.star,
                                           color: AppColors.darkGreen,
-                                          size: 20,
+                                          size: ResponsiveUtils.f(context, 20),
                                         ),
                                       ),
                                     ),
@@ -180,14 +186,17 @@ class _OnboardingPageState extends State<OnboardingPage>
                               ),
                             ),
                           ),
-                          const SizedBox(height: 40),
+                          SizedBox(height: ResponsiveUtils.h(context, 40)),
                           const Spacer(flex: 1),
                           Text(
                             AppConstants.onboardingTitle,
                             style: Theme.of(context).textTheme.displayLarge
-                                ?.copyWith(fontWeight: FontWeight.bold),
+                                ?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: ResponsiveUtils.f(context, 28),
+                                ),
                           ),
-                          const SizedBox(height: 16),
+                          SizedBox(height: ResponsiveUtils.h(context, 16)),
                           Text(
                             AppConstants.onboardingSubtitle,
                             style: Theme.of(context).textTheme.bodyMedium
@@ -197,44 +206,83 @@ class _OnboardingPageState extends State<OnboardingPage>
                                   ),
                                   height: 1.5,
                                   fontWeight: FontWeight.w500,
+                                  fontSize: ResponsiveUtils.f(context, 14),
                                 ),
                           ),
-                          const SizedBox(height: 32),
-                          SizedBox(
+                          SizedBox(height: ResponsiveUtils.h(context, 32)),
+                          Container(
                             width: double.infinity,
-                            height: 60,
-                            child: ElevatedButton(
-                              onPressed: () {
-                                Navigator.of(context).pushReplacement(
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        const MainNavigationPage(),
-                                  ),
-                                );
-                              },
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: AppColors.white,
-                                foregroundColor: AppColors.black,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(30),
-                                ),
+                            height: ResponsiveUtils.h(context, 64),
+                            decoration: BoxDecoration(
+                              gradient: const LinearGradient(
+                                colors: [AppColors.white, AppColors.white],
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
                               ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  const Icon(Icons.shopping_cart, size: 24),
-                                  const SizedBox(width: 12),
-                                  Text(
-                                    AppConstants.startButtonText,
-                                    style: Theme.of(
-                                      context,
-                                    ).textTheme.titleLarge,
+                              borderRadius: BorderRadius.circular(
+                                ResponsiveUtils.r(context, 32),
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: AppColors.primaryGreen.withValues(
+                                    alpha: 0.4,
                                   ),
-                                ],
+                                  blurRadius: ResponsiveUtils.r(context, 20),
+                                  offset: Offset(
+                                    0,
+                                    ResponsiveUtils.h(context, 8),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            child: Material(
+                              color: Colors.transparent,
+                              child: InkWell(
+                                onTap: () {
+                                  Navigator.of(context).pushReplacement(
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          const MainNavigationPage(),
+                                    ),
+                                  );
+                                },
+                                borderRadius: BorderRadius.circular(
+                                  ResponsiveUtils.r(context, 32),
+                                ),
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: ResponsiveUtils.w(context, 24),
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.shopping_cart_rounded,
+                                        size: ResponsiveUtils.f(context, 20),
+                                        color: AppColors.black,
+                                      ),
+                                      SizedBox(
+                                        width: ResponsiveUtils.w(context, 12),
+                                      ),
+                                      Text(
+                                        AppConstants.startButtonText,
+                                        style: TextStyle(
+                                          fontSize: ResponsiveUtils.f(
+                                            context,
+                                            18,
+                                          ),
+                                          fontWeight: FontWeight.bold,
+                                          color: AppColors.black,
+                                          letterSpacing: 0.5,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
                               ),
                             ),
                           ),
-                          const SizedBox(height: 24),
+                          SizedBox(height: ResponsiveUtils.h(context, 24)),
                         ],
                       ),
                     ),
@@ -250,11 +298,11 @@ class _OnboardingPageState extends State<OnboardingPage>
 
   List<Widget> _buildAnimatedVegetables() {
     final positions = [
-      const Offset(-30, 30),
-      const Offset(0, -15),
-      const Offset(-40, 0),
-      const Offset(30, 5),
-      const Offset(0, 35),
+      Offset(ResponsiveUtils.w(context, -30), ResponsiveUtils.h(context, 30)),
+      Offset(0, ResponsiveUtils.h(context, -15)),
+      Offset(ResponsiveUtils.w(context, -40), 0),
+      Offset(ResponsiveUtils.w(context, 30), ResponsiveUtils.h(context, 5)),
+      Offset(0, ResponsiveUtils.h(context, 35)),
     ];
 
     return List.generate(_vegetables.length, (index) {
@@ -262,21 +310,24 @@ class _OnboardingPageState extends State<OnboardingPage>
         animation: _vegetableScaleAnimations[index],
         builder: (context, child) {
           return Positioned(
-            left: 120 + positions[index].dx,
-            top: 125 + positions[index].dy,
+            left: ResponsiveUtils.w(context, 120) + positions[index].dx,
+            top: ResponsiveUtils.h(context, 125) + positions[index].dy,
             child: Transform.scale(
               scale: _vegetableScaleAnimations[index].value,
               child: Transform.rotate(
                 angle: (index * 0.3) * _vegetableScaleAnimations[index].value,
                 child: Text(
                   _vegetables[index],
-                  style: const TextStyle(
-                    fontSize: 45,
+                  style: TextStyle(
+                    fontSize: ResponsiveUtils.f(context, 45),
                     shadows: [
                       Shadow(
-                        blurRadius: 4,
+                        blurRadius: ResponsiveUtils.r(context, 4),
                         color: Colors.black26,
-                        offset: Offset(2, 2),
+                        offset: Offset(
+                          ResponsiveUtils.w(context, 2),
+                          ResponsiveUtils.h(context, 2),
+                        ),
                       ),
                     ],
                   ),
@@ -291,15 +342,18 @@ class _OnboardingPageState extends State<OnboardingPage>
 
   Widget _buildFloatingBadge(String text, Icon icon) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      padding: EdgeInsets.symmetric(
+        horizontal: ResponsiveUtils.p(context, 12),
+        vertical: ResponsiveUtils.p(context, 8),
+      ),
       decoration: BoxDecoration(
-        color: AppColors.lightGreen.withOpacity(0.95),
-        borderRadius: BorderRadius.circular(20),
+        color: AppColors.white,
+        borderRadius: BorderRadius.circular(ResponsiveUtils.r(context, 20)),
         boxShadow: [
           BoxShadow(
-            color: AppColors.black.withOpacity(0.1),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
+            color: AppColors.black.withValues(alpha: 0.1),
+            blurRadius: ResponsiveUtils.r(context, 10),
+            offset: Offset(0, ResponsiveUtils.h(context, 4)),
           ),
         ],
       ),
@@ -307,27 +361,16 @@ class _OnboardingPageState extends State<OnboardingPage>
         mainAxisSize: MainAxisSize.min,
         children: [
           icon,
-          const SizedBox(width: 8),
+          SizedBox(width: ResponsiveUtils.w(context, 8)),
           Text(
             text,
-            style: const TextStyle(
-              fontSize: 11,
+            style: TextStyle(
+              fontSize: ResponsiveUtils.f(context, 11),
               color: AppColors.textPrimary,
               fontWeight: FontWeight.w500,
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _buildPageIndicator(bool isActive) {
-    return Container(
-      width: isActive ? 24 : 8,
-      height: 8,
-      decoration: BoxDecoration(
-        color: isActive ? AppColors.black : AppColors.black.withOpacity(0.3),
-        borderRadius: BorderRadius.circular(4),
       ),
     );
   }

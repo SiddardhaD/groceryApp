@@ -5,6 +5,7 @@ class Deal extends Equatable {
   final String title;
   final String description;
   final int discount;
+  final String discountUnit;
   final String imageUrl;
   final String backgroundColor;
 
@@ -13,17 +14,19 @@ class Deal extends Equatable {
     required this.title,
     required this.description,
     required this.discount,
+    required this.discountUnit,
     required this.imageUrl,
     required this.backgroundColor,
   });
 
   @override
   List<Object?> get props => [
-        id,
-        title,
-        description,
-        discount,
-        imageUrl,
-        backgroundColor,
-      ];
+    id,
+    title,
+    description,
+    discount,
+    discountUnit,
+    imageUrl,
+    backgroundColor,
+  ];
 }

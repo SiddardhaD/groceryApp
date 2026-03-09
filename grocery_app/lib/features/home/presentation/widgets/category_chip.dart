@@ -7,10 +7,7 @@ import '../providers/home_providers.dart';
 class CategoryChip extends ConsumerWidget {
   final CategoryItem category;
 
-  const CategoryChip({
-    super.key,
-    required this.category,
-  });
+  const CategoryChip({super.key, required this.category});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -19,30 +16,21 @@ class CategoryChip extends ConsumerWidget {
         ref.read(categoriesProvider.notifier).selectCategory(category.id);
       },
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
         decoration: BoxDecoration(
           color: category.isSelected ? AppColors.black : AppColors.white,
           borderRadius: BorderRadius.circular(25),
-          border: Border.all(
-            color: category.isSelected
-                ? AppColors.black
-                : AppColors.grey.withOpacity(0.3),
-            width: 1,
-          ),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
-              category.icon,
-              style: const TextStyle(fontSize: 18),
-            ),
+            Text(category.icon, style: const TextStyle(fontSize: 18)),
             const SizedBox(width: 8),
             Text(
               category.name,
               style: TextStyle(
                 color: category.isSelected ? AppColors.white : AppColors.black,
-                fontWeight: FontWeight.w600,
+                fontWeight: FontWeight.w500,
                 fontSize: 14,
               ),
             ),

@@ -1,32 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:grocery_app/core/utils/responsive_utils.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../domain/entities/deal.dart';
 
 class DealCard extends StatelessWidget {
   final Deal deal;
 
-  const DealCard({
-    super.key,
-    required this.deal,
-  });
+  const DealCard({super.key, required this.deal});
 
   @override
   Widget build(BuildContext context) {
     Color bgColor = _getBackgroundColor(deal.backgroundColor);
 
     return Container(
-      width: 160,
-      padding: const EdgeInsets.all(16),
+      width: ResponsiveUtils.w(context, 135),
       decoration: BoxDecoration(
-        color: bgColor,
+        gradient: LinearGradient(
+          colors: [AppColors.white, bgColor],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+        ),
         borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            color: AppColors.black.withOpacity(0.05),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          ),
-        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,27 +29,49 @@ class DealCard extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                deal.description,
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
+              SizedBox(height: ResponsiveUtils.h(context, 4)),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: ResponsiveUtils.p(context, 16),
+                ),
+                child: Text(
+                  deal.discountUnit,
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w400),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: ResponsiveUtils.p(context, 16),
+                ),
+                child: Text(
+                  deal.description,
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w700),
+                ),
               ),
               const SizedBox(height: 4),
-              Text(
-                deal.title,
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: AppColors.textSecondary,
-                    ),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: ResponsiveUtils.p(context, 16),
+                ),
+                child: Text(
+                  deal.title,
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: AppColors.textSecondary,
+                  ),
+                ),
               ),
             ],
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text(
+              Image.network(
                 deal.imageUrl,
-                style: const TextStyle(fontSize: 48),
+                height: ResponsiveUtils.h(context, 90),
               ),
             ],
           ),

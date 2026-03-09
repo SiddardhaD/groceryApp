@@ -20,10 +20,7 @@ class CategoriesPage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: AppColors.white,
-      appBar: AppBar(
-        title: const Text('Categories'),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: const Text('Categories'), centerTitle: true),
       body: Padding(
         padding: const EdgeInsets.all(AppConstants.defaultPadding),
         child: GridView.builder(
@@ -69,7 +66,7 @@ class CategoriesPage extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: AppColors.black.withOpacity(0.05),
+            color: AppColors.black.withValues(alpha: 0.05),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -85,16 +82,13 @@ class CategoriesPage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  icon,
-                  style: const TextStyle(fontSize: 48),
-                ),
+                Text(icon, style: const TextStyle(fontSize: 48)),
                 const SizedBox(height: 12),
                 Text(
                   name,
-                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        fontWeight: FontWeight.w600,
-                      ),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w600),
                   textAlign: TextAlign.center,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
@@ -103,8 +97,8 @@ class CategoriesPage extends StatelessWidget {
                 Text(
                   '$count items',
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: AppColors.textSecondary,
-                      ),
+                    color: AppColors.textSecondary,
+                  ),
                 ),
               ],
             ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/constants/app_constants.dart';
+import '../../../../core/utils/responsive_utils.dart';
 import '../providers/home_providers.dart';
 import '../../../profile/presentation/providers/user_providers.dart';
 import '../widgets/category_chip.dart';
@@ -20,251 +21,369 @@ class HomePage extends ConsumerWidget {
     final products = ref.watch(filteredProductsProvider);
 
     return Scaffold(
-      backgroundColor: AppColors.primaryGreen,
-      body: SafeArea(
-        child: Column(
-          children: [
-            // Header Section
-            Padding(
-              padding: const EdgeInsets.all(AppConstants.defaultPadding),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // User Info
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          Container(
-                            width: 50,
-                            height: 50,
-                            decoration: BoxDecoration(
-                              color: AppColors.white,
-                              shape: BoxShape.circle,
-                              border: Border.all(
-                                color: AppColors.darkGreen,
-                                width: 2,
-                              ),
-                            ),
-                            child: Center(
-                              child: Text(
-                                user.avatarUrl ?? '👤',
-                                style: const TextStyle(fontSize: 24),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(width: 12),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                AppConstants.welcomeBack,
-                                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                      color: AppColors.textPrimary.withOpacity(0.7),
-                                    ),
-                              ),
-                              Text(
-                                user.name,
-                                style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      Container(
-                        width: 50,
-                        height: 50,
-                        decoration: BoxDecoration(
-                          color: AppColors.white,
-                          shape: BoxShape.circle,
-                        ),
-                        child: IconButton(
-                          onPressed: () {},
-                          icon: const Icon(Icons.notifications_outlined),
-                          color: AppColors.black,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 24),
-                  
-                  // Title
-                  Text(
-                    AppConstants.planGrocery,
-                    style: Theme.of(context).textTheme.displayMedium?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
-                  ),
-                  const Row(
-                    children: [
-                      Text('🛒', style: TextStyle(fontSize: 28)),
-                    ],
-                  ),
-                  const SizedBox(height: 20),
-                  
-                  // Search Bar and Location
-                  const HomeSearchBar(),
-                ],
+      backgroundColor: Color.fromARGB(255, 245, 245, 245),
+      body: Stack(
+        children: [
+          Container(
+            height: ResponsiveUtils.h(context, 220),
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Color(0xFFD9FF40), Color(0xFFEFFF48)],
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
               ),
             ),
-            
-            // Content Section (White Background)
-            Expanded(
-              child: Container(
-                decoration: const BoxDecoration(
-                  color: AppColors.white,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(30),
-                    topRight: Radius.circular(30),
-                  ),
-                ),
-                child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(height: 20),
-                      
-                      // Categories
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: AppConstants.defaultPadding,
-                        ),
-                        child: SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            children: categories.map((category) {
-                              return Padding(
-                                padding: const EdgeInsets.only(right: 8),
-                                child: CategoryChip(category: category),
-                              );
-                            }).toList(),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 24),
-                      
-                      // Best Value Days
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: AppConstants.defaultPadding,
-                        ),
-                        child: Text(
-                          AppConstants.bestValueDays,
-                          style: Theme.of(context).textTheme.headlineMedium,
-                        ),
-                      ),
-                      const SizedBox(height: 16),
-                      
-                      SizedBox(
-                        height: 160,
-                        child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: AppConstants.defaultPadding,
-                          ),
-                          itemCount: deals.length,
-                          itemBuilder: (context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.only(right: 12),
-                              child: DealCard(deal: deals[index]),
-                            );
-                          },
-                        ),
-                      ),
-                      const SizedBox(height: 24),
-                      
-                      // Repeat & Save Section
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: AppConstants.defaultPadding,
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+          ),
+          Container(
+            height: ResponsiveUtils.h(context, 220),
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [Color(0xFFD9FF40), Color.fromARGB(255, 245, 245, 245)],
+                begin: Alignment.center,
+                end: Alignment.bottomCenter,
+              ),
+            ),
+          ),
+          SizedBox(
+            child: SafeArea(
+              child: Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.all(ResponsiveUtils.p(context, 16)),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
                           children: [
-                            Text(
-                              AppConstants.repeatAndSave,
-                              style: Theme.of(context).textTheme.headlineMedium,
+                            Expanded(
+                              child: Container(
+                                margin: EdgeInsets.only(
+                                  right: ResponsiveUtils.h(context, 70),
+                                ),
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: ResponsiveUtils.p(context, 8),
+                                  vertical: ResponsiveUtils.p(context, 8),
+                                ),
+                                decoration: BoxDecoration(
+                                  color: AppColors.white,
+                                  borderRadius: BorderRadius.circular(
+                                    ResponsiveUtils.r(context, 35),
+                                  ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: AppColors.black.withValues(
+                                        alpha: 0.08,
+                                      ),
+                                      blurRadius: ResponsiveUtils.r(
+                                        context,
+                                        15,
+                                      ),
+                                      offset: Offset(
+                                        0,
+                                        ResponsiveUtils.h(context, 4),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      width: ResponsiveUtils.w(context, 40),
+                                      height: ResponsiveUtils.h(context, 40),
+                                      decoration: BoxDecoration(
+                                        color: AppColors.lightGrey,
+                                        shape: BoxShape.circle,
+                                        image: user.avatarUrl != null
+                                            ? DecorationImage(
+                                                image: NetworkImage(
+                                                  user.avatarUrl!,
+                                                ),
+                                                fit: BoxFit.cover,
+                                              )
+                                            : null,
+                                      ),
+                                      child: user.avatarUrl == null
+                                          ? Center(
+                                              child: Text(
+                                                '👤',
+                                                style: TextStyle(
+                                                  fontSize: ResponsiveUtils.f(
+                                                    context,
+                                                    24,
+                                                  ),
+                                                ),
+                                              ),
+                                            )
+                                          : null,
+                                    ),
+                                    SizedBox(
+                                      width: ResponsiveUtils.w(context, 12),
+                                    ),
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            AppConstants.welcomeBack,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodySmall
+                                                ?.copyWith(
+                                                  color:
+                                                      AppColors.textSecondary,
+                                                  fontSize: ResponsiveUtils.f(
+                                                    context,
+                                                    12,
+                                                  ),
+                                                ),
+                                          ),
+                                          Text(
+                                            user.name,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .titleLarge
+                                                ?.copyWith(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: ResponsiveUtils.f(
+                                                    context,
+                                                    14,
+                                                  ),
+                                                ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ),
-                            const SizedBox(height: 12),
-                            
-                            // Tabs
-                            Row(
-                              children: [
-                                _buildTab(
-                                  context,
-                                  AppConstants.bestPrices,
-                                  isSelected: true,
-                                ),
-                                const SizedBox(width: 16),
-                                _buildTab(
-                                  context,
-                                  AppConstants.orderAgain,
-                                  isSelected: false,
-                                ),
-                                const SizedBox(width: 16),
-                                _buildTab(
-                                  context,
-                                  AppConstants.trendingNow,
-                                  isSelected: false,
-                                ),
-                              ],
+                            SizedBox(width: ResponsiveUtils.w(context, 12)),
+                            Container(
+                              width: ResponsiveUtils.w(context, 50),
+                              height: ResponsiveUtils.h(context, 50),
+                              decoration: const BoxDecoration(
+                                color: AppColors.white,
+                                shape: BoxShape.circle,
+                              ),
+                              child: IconButton(
+                                onPressed: () {},
+                                icon: const Icon(Icons.notifications_outlined),
+                                color: AppColors.black,
+                                iconSize: ResponsiveUtils.f(context, 24),
+                              ),
                             ),
                           ],
                         ),
-                      ),
-                      const SizedBox(height: 16),
-                      
-                      // Products Grid
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: AppConstants.defaultPadding,
+                        SizedBox(height: ResponsiveUtils.h(context, 18)),
+
+                        Row(
+                          children: [
+                            Text(
+                              AppConstants.planGrocery,
+                              style: Theme.of(context).textTheme.displayMedium
+                                  ?.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: ResponsiveUtils.f(context, 18),
+                                  ),
+                            ),
+                            SizedBox(width: ResponsiveUtils.w(context, 12)),
+                            Text(
+                              '🛒',
+                              style: TextStyle(
+                                fontSize: ResponsiveUtils.f(context, 18),
+                              ),
+                            ),
+                          ],
                         ),
-                        child: GridView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            crossAxisSpacing: 12,
-                            mainAxisSpacing: 12,
-                            childAspectRatio: 0.75,
-                          ),
-                          itemCount: products.length,
-                          itemBuilder: (context, index) {
-                            return ProductCard(product: products[index]);
-                          },
-                        ),
-                      ),
-                      const SizedBox(height: 24),
-                    ],
+                        SizedBox(height: ResponsiveUtils.h(context, 20)),
+                        const HomeSearchBar(),
+                      ],
+                    ),
                   ),
-                ),
+                  Expanded(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 245, 245, 245),
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(
+                            ResponsiveUtils.r(context, 20),
+                          ),
+                          topRight: Radius.circular(
+                            ResponsiveUtils.r(context, 20),
+                          ),
+                        ),
+                      ),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(height: ResponsiveUtils.h(context, 8)),
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: ResponsiveUtils.p(context, 16),
+                              ),
+                              child: SingleChildScrollView(
+                                scrollDirection: Axis.horizontal,
+                                child: Row(
+                                  children: categories.map((category) {
+                                    return Padding(
+                                      padding: EdgeInsets.only(
+                                        right: ResponsiveUtils.w(context, 8),
+                                      ),
+                                      child: CategoryChip(category: category),
+                                    );
+                                  }).toList(),
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: ResponsiveUtils.h(context, 14)),
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: ResponsiveUtils.p(context, 20),
+                              ),
+                              child: Text(
+                                AppConstants.bestValueDays,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineMedium
+                                    ?.copyWith(fontSize: 18),
+                              ),
+                            ),
+                            SizedBox(height: ResponsiveUtils.h(context, 12)),
+                            SizedBox(
+                              height: ResponsiveUtils.h(context, 160),
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: ResponsiveUtils.p(context, 16),
+                                ),
+                                itemCount: deals.length,
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                    padding: EdgeInsets.only(
+                                      right: ResponsiveUtils.w(context, 12),
+                                    ),
+                                    child: DealCard(deal: deals[index]),
+                                  );
+                                },
+                              ),
+                            ),
+                            SizedBox(height: ResponsiveUtils.h(context, 20)),
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: ResponsiveUtils.p(context, 20),
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    AppConstants.repeatAndSave,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .headlineMedium
+                                        ?.copyWith(
+                                          fontSize: ResponsiveUtils.f(
+                                            context,
+                                            20,
+                                          ),
+                                        ),
+                                  ),
+                                  SizedBox(
+                                    height: ResponsiveUtils.h(context, 20),
+                                  ),
+                                  Row(
+                                    children: [
+                                      _buildTab(
+                                        context,
+                                        AppConstants.bestPrices,
+                                        isSelected: true,
+                                      ),
+                                      SizedBox(
+                                        width: ResponsiveUtils.w(context, 16),
+                                      ),
+                                      _buildTab(
+                                        context,
+                                        AppConstants.orderAgain,
+                                        isSelected: false,
+                                      ),
+                                      SizedBox(
+                                        width: ResponsiveUtils.w(context, 16),
+                                      ),
+                                      _buildTab(
+                                        context,
+                                        AppConstants.trendingNow,
+                                        isSelected: false,
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(height: ResponsiveUtils.h(context, 16)),
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: ResponsiveUtils.p(context, 16),
+                              ),
+                              child: GridView.builder(
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                gridDelegate:
+                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2,
+                                      crossAxisSpacing: ResponsiveUtils.w(
+                                        context,
+                                        12,
+                                      ),
+                                      mainAxisSpacing: ResponsiveUtils.h(
+                                        context,
+                                        12,
+                                      ),
+                                      childAspectRatio: 1,
+                                    ),
+                                itemCount: products.length,
+                                itemBuilder: (context, index) {
+                                  return ProductCard(product: products[index]);
+                                },
+                              ),
+                            ),
+                            SizedBox(height: ResponsiveUtils.h(context, 24)),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
 
-  Widget _buildTab(BuildContext context, String text, {required bool isSelected}) {
+  Widget _buildTab(
+    BuildContext context,
+    String text, {
+    required bool isSelected,
+  }) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+      padding: EdgeInsets.symmetric(
+        horizontal: ResponsiveUtils.p(context, 4),
+        vertical: ResponsiveUtils.p(context, 2),
+      ),
       decoration: BoxDecoration(
         border: isSelected
-            ? const Border(
-                bottom: BorderSide(color: AppColors.black, width: 2),
-              )
+            ? const Border(bottom: BorderSide(color: AppColors.black, width: 2))
             : null,
       ),
       child: Text(
         text,
         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
-              color: isSelected ? AppColors.black : AppColors.textSecondary,
-            ),
+          fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+          color: isSelected ? AppColors.black : AppColors.textSecondary,
+          fontSize: ResponsiveUtils.f(context, 14),
+        ),
       ),
     );
   }

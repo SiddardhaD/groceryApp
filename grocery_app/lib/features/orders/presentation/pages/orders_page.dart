@@ -36,10 +36,7 @@ class OrdersPage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: AppColors.white,
-      appBar: AppBar(
-        title: const Text('Order Again'),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: const Text('Order Again'), centerTitle: true),
       body: ListView.builder(
         padding: const EdgeInsets.all(AppConstants.defaultPadding),
         itemCount: orders.length,
@@ -60,7 +57,7 @@ class OrdersPage extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: AppColors.black.withOpacity(0.05),
+            color: AppColors.black.withValues(alpha: 0.05),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -78,15 +75,15 @@ class OrdersPage extends StatelessWidget {
                   Text(
                     order['id'],
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   const SizedBox(height: 4),
                   Text(
                     order['date'],
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: AppColors.textSecondary,
-                        ),
+                      color: AppColors.textSecondary,
+                    ),
                   ),
                 ],
               ),
@@ -96,7 +93,7 @@ class OrdersPage extends StatelessWidget {
                   vertical: 6,
                 ),
                 decoration: BoxDecoration(
-                  color: AppColors.success.withOpacity(0.2),
+                  color: AppColors.success.withValues(alpha: 0.2),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(
@@ -111,7 +108,7 @@ class OrdersPage extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 16),
-          
+
           // Product Icons
           Row(
             children: [
@@ -133,7 +130,7 @@ class OrdersPage extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 16),
-          
+
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -147,8 +144,8 @@ class OrdersPage extends StatelessWidget {
                   Text(
                     'Total: ${order['total']}',
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ],
               ),
